@@ -13,7 +13,9 @@ int main()
 		cin >> choice;
 		switch (choice)
 		{
-
+		case 1:
+			cout << "hello  world"  <<endl;
+			break;
 
 		default:
 			break;
