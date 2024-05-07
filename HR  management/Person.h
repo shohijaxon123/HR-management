@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
-# include <regex>
+#include <regex>
+#include<vector>
 
 using namespace std;
 
@@ -105,11 +106,11 @@ string Person::get_phoneNumber(string num){
 //Display function
 void Person::display_info_of_person(){
 	cout<< "---------------------------"<< endl;
-	cout<< "Name" << Name << endl;
-	cout<< "Age" << Age << endl;
-	cout<< "Address" << Address << endl;
-	cout<< "Phone Number" << Phone_number << endl;
-	cout<< "Email address" << Email << endl;
+	cout<< "Name: " << Name << endl;
+	cout<< "Age: " << Age << endl;
+	cout<< "Address: " << Address << endl;
+	cout<< "Phone Number: " << Phone_number << endl;
+	cout<< "Email address: " << Email << endl;
 }
 
 
