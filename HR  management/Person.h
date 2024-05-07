@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const double TAX_RATE = 0.12;
+
 const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+"); 
   
 
@@ -66,7 +66,7 @@ void Person::set_age(unsigned int age){
 	if (age > 0 && age < 120)
 		Age = age;
 	else
-		Age = 0;//Exception handling
+		Age = 0;
 }
 void Person::set_address(string address){
 	Address = address;
@@ -110,62 +110,9 @@ void Person::display_info_of_person(){
 	cout<< "Address" << Address << endl;
 	cout<< "Phone Number" << Phone_number << endl;
 	cout<< "Email address" << Email << endl;
-	cout<< "---------------------------"<< endl;
 }
 
-class Employee:public Person
-{
-private:
-	string Position;
-	string Working_Email;
-	string Working_Phone_Number;
-	double Salary;
-public:
-	// Default constructor
-	Employee() : Person(){
-		Name = "Unknown";
-		Age = 0;
-		Address = "";
-		Email = "";
-		Phone_number = "";
-		Position;
-		Working_Email = "";
-		Working_Phone_Number = "";
-		Salary = 0.0;
-	}
-	// Parametrized constructor without email and phone number
-	Employee(const string& name, unsigned int age, string address, string position, string working_email, string working_number, double salary, double tax) : Person(name, age, address){
-		Name = name;
-		Age = age;
-		Address = address;
-		Email = "";
-		Phone_number = "";
-		Position = position;
-		Working_Email = working_email;
-		Working_Phone_Number = working_number;
-		Salary;//salary_total();
-	}
 
-	Employee(const string& name, unsigned int age, string address, string email, string number, string position, string working_email, string working_number, double salary, double tax) : Person(name, age, address, email, number){
-		Name = name;
-		Age = age;
-		Address = address;
-		Email = email;
-		Phone_number = number;
-		Position = position;
-		Working_Email = working_email;
-		Working_Phone_Number = working_number;
-		Salary = Calculate_Tax(salary, TAX_RATE); //salary_total
-	}
-
-	// Salary with the Tax
-	static double Calculate_Tax(double salary, double tax_rate){
-		double Total_Salary = salary - salary*tax_rate;
-		return Total_Salary; // need to round up to three digits 
-	}
-
-
-};
 
 
 
