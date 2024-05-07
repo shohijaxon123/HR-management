@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-# include <regex>
+#include <regex>
 #include<Person.h>
 
 using namespace std;
@@ -9,7 +9,7 @@ using namespace std;
 
 class Candidate : public Person{
 private:
-    // Dynamic Array with skills
+    // Skills = Dynamic Array with skills using vectors or new
     int Experience;
     int Rating;
     bool Accepted;
@@ -48,6 +48,36 @@ public:
         cout << "Rating: " << Rating<<endl;
     }
 
+    void set_experience(int exp);
+    void set_rating(int rating);
+    void set_status(bool status);
+
+    int get_experience();
+    int get_rating();
+    bool get_status();
+
 };
 
-//Getters and setters required
+//Setters
+
+void Candidate::set_experience(int exp){
+    Experience = exp;
+}
+void Candidate::set_rating(int rating){
+    Rating = rating;
+}
+void Candidate::set_status(bool status){
+    Accepted = status;
+}
+
+//Getters
+
+int Candidate::get_experience(){
+    return Experience;
+}
+int Candidate::get_rating(){
+    return Rating;
+}
+bool Candidate::get_status(){
+    return Accepted;
+}

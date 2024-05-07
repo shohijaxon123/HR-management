@@ -66,8 +66,41 @@ public:
         cout<<"Salary: "<< Salary <<endl;
         cout<<"Contract duration: "<< Contract_duration<<" months."<<endl;
     }
+
+    //setters
+    void set_Position(string pos);
+    void set_Salary(double salary);
+    void set_new_Contract_duration(int new_date);
+
+    // Getters
+    int get_Contract_duration();
+    string get_Position();
+    double get_Salary();
+    int get_year_of_enrolling();
 };
 
-//Getters required!!!
+//Setters
 
-// Setters required!!!
+void Employee::set_Position(string pos){
+    Position = pos;
+}
+void Employee::set_Salary(double salary){
+    Salary = salary;
+}
+void Employee::set_new_Contract_duration(int new_date){
+    Contract_duration = new_date;
+}
+
+// Getters
+int Employee::get_Contract_duration(){
+    return Contract_duration;
+}
+string Employee::get_Position(){
+    return Position;
+}
+double Employee::get_Salary(){
+    return Salary;
+}
+int Employee::get_year_of_enrolling(){
+    return Year_of_enrolling;
+}
