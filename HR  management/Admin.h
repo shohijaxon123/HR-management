@@ -42,15 +42,13 @@ public:
 		unsigned int Age;
 		vector<string> Skills;
 		int Experience;
-		bool Accepted;
 		cout << "Input data of an employee: " << endl;
 		cout << "Input Name: "; cin >> Name;
 		cout << "Input Age: "; cin >> Age;
 		cout << "Input Address: "; cin >> Address;
 		cout << "Input Email: "; cin >> Email;
 		cout << "Input Phone_number: "; cin >> Phone_number;
-		cout << "Input Experience: "; cin >> Experience;
-		cout << "Input Status (1 - accepted, 0 - not accepted): "; cin >> Accepted;
+		cout << "Input Experience in years: "; cin >> Experience;
 		
 		Candidate cand(Name, Age, Address, Email, Phone_number, Experience);
 		cand.set_skills();
@@ -66,15 +64,13 @@ public:
 		unsigned int Age;
 		vector<string> Skills;
 		int Experience;
-		bool Accepted;
 		cout << "Input data of an employee: " << endl;
 		cout << "Input Name: "; cin >> Name;
 		cout << "Input Age: "; cin >> Age;
 		cout << "Input Address: "; cin >> Address;
 		cout << "Input Email: "; cin >> Email;
 		cout << "Input Phone_number: "; cin >> Phone_number;
-		cout << "Input Experience: "; cin >> Experience;
-		cout << "Input Status (1 - accepted, 0 - not accepted): "; cin >> Accepted;
+		cout << "Input Experience in years: "; cin >> Experience;
 
 		Candidate cand(Name, Age, Address, Email, Phone_number, Experience, skills);
 		List_of_candidates.push_back(cand);

@@ -46,7 +46,7 @@ public:
 		return Total_Salary; // need to round up to three digits 
 	}
 
-    void display_info_of_Employee(){
+    void display_info(){
         Person::display_info_of_person();
         cout<<"Enrolling Year: "<<Year_of_enrolling<<" years"<<endl;
         cout<<"Position: "<< Position <<endl;

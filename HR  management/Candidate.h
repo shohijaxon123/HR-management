@@ -52,7 +52,7 @@ public:
         Skills.clear();
     }
 
-    void display_info_of_Candidate();
+    void display_info();
 
     void set_experience(int exp);
     void set_status(bool status);
@@ -107,7 +107,7 @@ bool Candidate::get_status(){
 
 //Display functions
 
-void Candidate::display_info_of_Candidate(){
+void Candidate::display_info(){
         Person::display_info_of_person();
         cout<<"Experience: "<< Experience<<" years"<<endl;
         cout<<"Accepted: "<< Accepted <<endl;
