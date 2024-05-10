@@ -25,18 +25,6 @@ public:
 		Position = "";
 		Salary = 0.0;
 	}
-	// Parametrized constructor without email and phone number
-	Employee(const string& name, unsigned int age, string address, int year_of_enrolling, string position, int duration, double salary) : Person(name, age, address){
-		Name = name;
-		Age = age;
-		Address = address;
-		Email = "";
-		Phone_number = "";
-		Position = position;
-        Year_of_enrolling = year_of_enrolling;
-        Contract_duration = duration;
-		Salary = Calculate_Tax(salary, TAX_RATE); //salary_total
-	}
 
 	Employee(const string& name, unsigned int age, string address, string email, string number, int year_of_enrolling, string position, int duration, double salary) : Person(name, age, address, email, number){
 		Name = name;
@@ -64,7 +52,7 @@ public:
         cout<<"Contract duration: "<< Contract_duration<<" months."<<endl;
     }
 
-    //setters
+    //Setters
     void set_Position(string pos);
     void set_Salary(double salary);
     void set_new_Contract_duration(int new_date);
