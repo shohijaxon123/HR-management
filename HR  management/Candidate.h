@@ -9,7 +9,6 @@ private:
     // Skills = Dynamic Array with skills using vectors or new
     vector<string> Skills;
     int Experience;
-    int Rating;
     bool Accepted;
 
 public:
@@ -50,16 +49,13 @@ public:
 
 
     void display_info_of_Candidate();
-    void show_rating();
 
     void set_experience(int exp);
-    void set_rating(int rating);
     void set_status(bool status);
     void set_skills();
 
     vector<string> get_skills();
     int get_experience();
-    int get_rating();
     bool get_status();
 
 
@@ -71,9 +67,7 @@ public:
 void Candidate::set_experience(int exp){
     Experience = exp;
 }
-void Candidate::set_rating(int rating){
-    Rating = rating;
-}
+
 void Candidate::set_status(bool status){
     Accepted = status;
 }
@@ -87,7 +81,7 @@ void Candidate::set_skills(){
         cout<<"Enter your skill : "; cin>>skill;
         Skills.push_back(skill);
         
-    } while (skill != "stop");
+    } while (skill.tolower() != "stop");
     Skills.shrink_to_fit();
 }
 
@@ -99,9 +93,7 @@ vector<string> Candidate::get_skills(){
 int Candidate::get_experience(){
     return Experience;
 }
-int Candidate::get_rating(){
-    return Rating;
-}
+
 bool Candidate::get_status(){
     return Accepted;
 }
@@ -113,10 +105,6 @@ void Candidate::display_info_of_Candidate(){
         cout<<"Experience: "<< Experience<<" years"<<endl;
         cout<<"Skills:\n"; this->show_skills();
         cout<<"Accepted: "<< Accepted<<endl;
-    }
-
-void Candidate::show_rating(){
-        cout << "Rating: " << Rating<<endl;
     }
 
 void Candidate::show_skills(){
