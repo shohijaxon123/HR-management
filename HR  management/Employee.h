@@ -38,6 +38,8 @@ public:
 		Salary = Calculate_Tax(salary, TAX_RATE); //salary_total
 	}
 
+    ~Employee() {};
+
 	// Salary with the Tax
 	double Calculate_Tax(double salary, double tax_rate){
 		double Total_Salary = salary - salary*tax_rate;

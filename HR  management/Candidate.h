@@ -13,7 +13,7 @@ private:
 
 public:
 
-//Default constructor
+    //Default constructor
     Candidate(){
         Name = "Unknown";
 		Age = 0;
@@ -47,6 +47,10 @@ public:
         Accepted = false;
     }
 
+    //Distructor
+    ~Candidate() {
+        Skills.clear();
+    }
 
     void display_info_of_Candidate();
 
@@ -78,10 +82,13 @@ void Candidate::set_skills(){
     
     do
     {
-        cout<<"Enter your skill : "; cin>>skill;
-        Skills.push_back(skill);
+        cout << "Enter your skill : "; cin >> skill;
+        if (skill != "stop") {
+            Skills.push_back(skill);
+    }
         
-    } while (skill.tolower() != "stop");
+        
+    } while (skill != "stop");
     Skills.shrink_to_fit();
 }
 
@@ -103,13 +110,13 @@ bool Candidate::get_status(){
 void Candidate::display_info_of_Candidate(){
         Person::display_info_of_person();
         cout<<"Experience: "<< Experience<<" years"<<endl;
-        cout<<"Skills:\n"; this->show_skills();
-        cout<<"Accepted: "<< Accepted<<endl;
+        cout<<"Accepted: "<< Accepted <<endl;
+        cout << "Skills:\n"; this->show_skills();
     }
 
 void Candidate::show_skills(){
-    for (int i=0; i<Skills.size(); i++){
-        cout<<i<<" - "<< Skills[i] <<endl;
+    for (int i=0; i < Skills.size(); i++){
+        cout<<i+1<<" - "<< Skills[i] <<endl;
     }
 }
 
