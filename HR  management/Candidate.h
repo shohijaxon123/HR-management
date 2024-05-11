@@ -6,11 +6,10 @@ using namespace std;
 
 class Candidate : public Person{
 private:
-    // Skills = Dynamic Array with skills using vectors or new
     vector<string> Skills;
     int Experience;
     bool Accepted;
-
+    int Rating;
 public:
 
     //Default constructor
@@ -22,7 +21,9 @@ public:
 		Phone_number = "";
         Experience = 0;
         Accepted = false;
+        Rating = 0;
     }
+
     //Parametrized constructor without skills
     Candidate(const string& name, unsigned int age, string address, string email, string number, int exp) : Person(name, age, address, email, number){
         Name = name;
@@ -32,11 +33,12 @@ public:
 		Phone_number = number;
         Experience = exp;
         Accepted = false;
+        Rating = 0;
     }
     //Parametrized constructor with skills
     // skill vector is a reference WARNING
 
-    Candidate(const string& name, unsigned int age, string address, string email, string number, int exp, vector<string>& skills) : Person(name, age, address, email, number){
+    Candidate(const string& name, unsigned int age, string address, string email, string number, int exp, vector<string> skills) : Person(name, age, address, email, number){
         Name = name;
 		Age = age;
 		Address = address;
@@ -45,23 +47,26 @@ public:
         Experience = exp;
         Skills = skills;
         Accepted = false;
+        Rating = 0;
     }
 
     //Distructor
     ~Candidate() {
         Skills.clear();
+        Skills.shrink_to_fit();
     }
 
-    void display_info_of_Candidate();
+    void display_info();
 
     void set_experience(int exp);
     void set_status(bool status);
     void set_skills();
+    void set_rating(int rate);
 
     vector<string> get_skills();
     int get_experience();
     bool get_status();
-
+    int get_rating();
 
     void show_skills();
 };
@@ -92,6 +97,10 @@ void Candidate::set_skills(){
     Skills.shrink_to_fit();
 }
 
+void Candidate::set_rating(int rate) {
+    Rating = rate;
+}
+
 //Getters
 vector<string> Candidate::get_skills(){
     return Skills;
@@ -104,10 +113,13 @@ int Candidate::get_experience(){
 bool Candidate::get_status(){
     return Accepted;
 }
+int Candidate::get_rating() {
+    return Rating;
+}
 
 //Display functions
 
-void Candidate::display_info_of_Candidate(){
+void Candidate::display_info(){
         Person::display_info_of_person();
         cout<<"Experience: "<< Experience<<" years"<<endl;
         cout<<"Accepted: "<< Accepted <<endl;
