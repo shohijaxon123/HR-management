@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include<cstring>
 #include <string>
 #include <regex>
 #include<vector>
@@ -47,11 +48,11 @@ public:
 	void set_email(string email);
 	void set_phoneNumber(string num);
 
-	string get_name(string const& name);
-	unsigned int get_age(unsigned int age);
-	string get_address(string address);
-	string get_email(string email);
-	string get_phoneNumber(string num);
+	string get_name();
+	unsigned int get_age();
+	string get_address();
+	string get_email();
+	string get_phoneNumber();
 
 	void display_info_of_person();
 };
@@ -87,19 +88,19 @@ void Person::set_phoneNumber(string num){
 
 //Getters
 
-string Person::get_name(string const& name){
+string Person::get_name(){
 	return Name;
 }
-unsigned int Person::get_age(unsigned int age){
+unsigned int Person::get_age(){
 	return Age;
 }
-string Person::get_address(string address){
+string Person::get_address(){
 	return Address;
 }
-string Person::get_email(string email){
+string Person::get_email(){
 	return Email;
 }
-string Person::get_phoneNumber(string num){
+string Person::get_phoneNumber(){
 	return Phone_number;
 }
 
@@ -112,14 +113,3 @@ void Person::display_info_of_person(){
 	cout<< "Phone Number: " << Phone_number << endl;
 	cout<< "Email address: " << Email << endl;
 }
-
-
-
-
-
-class AddEmployee
-{
-
-
-
-};

@@ -1,14 +1,23 @@
 #pragma once
+#include<vector>
 #include"Employee.h"
 #include"Candidate.h"
 #include"Person.h"
 using namespace std;
 
+
 class Admin{
 private:
-	vector<Candidate>List_of_candidates;
-	vector<Employee>List_of_employees;
+	static vector<Candidate>List_of_candidates;
+	static vector<Employee>List_of_employees;
+	static vector<Candidate>List_of_prommising_Candidates;
 public:
+
+	/*~Admin() {
+		List_of_employees.clear();
+		List_of_candidates.clear();
+		List_of_prommising_Candidates.clear();
+	}*/
 
 	//Create Employee (enter all the data from a console)
 
@@ -19,7 +28,8 @@ public:
 		int Year_of_enrolling, Contract_duration;
 		string Position;
 		double Salary;
-		cout << "Input data of an employee: " << endl;
+
+		cout << "\nInput data of an employee: " << endl;
 		cout << "Input Name: "; cin >> Name;
 		cout << "Input Age: "; cin >> Age;
 		cout << "Input Address: "; cin >> Address;
@@ -32,6 +42,7 @@ public:
 
 		Employee emp(Name, Age, Address, Email, Phone_number, Year_of_enrolling, Position, Contract_duration, Salary);
 		List_of_employees.push_back(emp);
+		List_of_employees.shrink_to_fit();
 		return emp;
 
 	}
@@ -42,7 +53,7 @@ public:
 		unsigned int Age;
 		vector<string> Skills;
 		int Experience;
-		cout << "Input data of an employee: " << endl;
+		cout << "\nInput data of a candidate: " << endl;
 		cout << "Input Name: "; cin >> Name;
 		cout << "Input Age: "; cin >> Age;
 		cout << "Input Address: "; cin >> Address;
@@ -53,6 +64,7 @@ public:
 		Candidate cand(Name, Age, Address, Email, Phone_number, Experience);
 		cand.set_skills();
 		List_of_candidates.push_back(cand);
+		List_of_candidates.shrink_to_fit();
 		return cand;
 
 	}
@@ -64,7 +76,7 @@ public:
 		unsigned int Age;
 		vector<string> Skills;
 		int Experience;
-		cout << "Input data of an employee: " << endl;
+		cout << "\nInput data of a candidate: " << endl;
 		cout << "Input Name: "; cin >> Name;
 		cout << "Input Age: "; cin >> Age;
 		cout << "Input Address: "; cin >> Address;
@@ -74,8 +86,27 @@ public:
 
 		Candidate cand(Name, Age, Address, Email, Phone_number, Experience, skills);
 		List_of_candidates.push_back(cand);
+		List_of_candidates.shrink_to_fit();
 		return cand;
 
+	}
+
+	vector<Candidate> get_Candidates() {
+		return List_of_candidates;
+	}
+
+	void display_candidates() {
+		for (int i = 0; i < List_of_candidates.size(); i++) {
+			cout << i + 1 << List_of_candidates[i].get_name() << endl;
+		}
+	}
+
+	void show_info(Employee obj) {
+		obj.display_info();
+	}
+
+	void show_info(Candidate obj) {
+		obj.display_info();
 	}
 
 	//Find and Sort candidates indicating skills required (strict and NOT strict search)
@@ -84,5 +115,44 @@ public:
 	// 
 	// Check If the contract of employee is still valid if not prolong a contract or delete employee
 
+	void recruitment(vector<string>& skills_required) {
+
+		//Transform into lower case
+
+
+	/*	for (int x = 0; x < List_of_candidates.size(); x++) {
+			for (int y = 0; y < List_of_candidates[x].get_skills().size(); y++) {
+				for (int z = 0; z < List_of_candidates[x].get_skills()[y].size(); z++) {
+					putchar(tolower(List_of_candidates[x].get_skills()[y][z]));
+				}
+			}
+			
+		}
+
+		for (int x = 0; x < skills_required.size(); x++){
+			for (int y = 0; y < skills_required[x].length(); y++)
+				putchar(tolower(skills_required[x][y]));
+		}		
+	*/
+		
+
+		for (int i = 0; i < List_of_candidates.size(); i++) {
+			int relevant_slkills = 0;
+			for (int j = 0; j < skills_required.size(); j++) {
+				for (int k = 0; k < List_of_candidates[i].get_skills().size(); k++) {
+					if (skills_required[j] == List_of_candidates[i].get_skills()[k]) {
+						relevant_slkills++;
+					}
+				}
+			}
+
+			int rating = (int) ceil(100 * relevant_slkills / skills_required.size());
+			List_of_candidates[i].set_rating(rating);
+		}
+
+
+
+		//return;
+	}
 
 };
