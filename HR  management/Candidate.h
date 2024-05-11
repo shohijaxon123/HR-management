@@ -67,8 +67,12 @@ public:
     int get_experience();
     bool get_status();
     int get_rating();
-
+   
     void show_skills();
+
+    void calculate_rating(vector<string>skills);
+
+
 };
 
 //Setters
@@ -84,7 +88,6 @@ void Candidate::set_skills(){
     string skill;
 
     cout<<"Enter your skills and if you want to stop enter 'stop' : "<<endl;
-    
     do
     {
         cout << "Enter your skill : "; cin >> skill;
@@ -118,7 +121,6 @@ int Candidate::get_rating() {
 }
 
 //Display functions
-
 void Candidate::display_info(){
         Person::display_info_of_person();
         cout<<"Experience: "<< Experience<<" years"<<endl;
@@ -128,7 +130,26 @@ void Candidate::display_info(){
 
 void Candidate::show_skills(){
     for (int i=0; i < Skills.size(); i++){
-        cout<<i+1<<" - "<< Skills[i] <<endl;
+        cout << i + 1 << " - " << Skills[i] << endl;
     }
+    cout << endl;
 }
 
+
+
+//Calculations
+void Candidate::calculate_rating(vector<string>skills) {
+
+    int relevant_skills = 0;
+    for (int i = 0; i < skills.size(); i++) {
+        for (int j = 0; j < this->get_skills().size(); j++) {
+            if (skills[i] == this->get_skills()[j]) {
+                relevant_skills++;
+                break;
+            }
+        }
+
+    }
+    int rating = (int)ceil(10 * relevant_skills / skills.size());
+    this->set_rating(rating);
+}
