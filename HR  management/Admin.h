@@ -20,6 +20,7 @@ private:
 
 	bool compare_Candidates(Candidate& a, Candidate& b);
 	void sort_Candidates_By_Rating(vector<Candidate>& candidates);
+	static int get_current_year();
 public:
 
 	/*~Admin() {
@@ -37,9 +38,9 @@ public:
 	Candidate create_candidate(const string& Name, unsigned int Age, string Address, string Phone_number, string Email, int Experience, vector<string>& skills);
 
 	vector<Candidate> search_candidate_by_name(const string& name);
-
+	vector<Employee> search_employee_by_name(const string& name);
 	vector<Candidate> get_Candidates();
-
+	void display_employees();
 	void display_candidates(); 
 	void show_info(Employee obj);
 	void show_info(Candidate obj);
@@ -55,7 +56,8 @@ public:
 	void Read_canditate_from_file();
 
 
-	
+
+	bool is_contract_valid(Employee obj);
 
 };
 
@@ -135,6 +137,16 @@ Candidate Admin::create_candidate(vector<string>& skills) {
 	return cand;
 }
 
+vector<Employee> Admin::search_employee_by_name(const string& name) {
+	vector<Employee> Result;
+	for (int i = 0; i < List_of_employees.size(); i++) {
+		if (List_of_candidates[i].get_name() == name) {
+			Result.push_back(List_of_employees[i]);
+		}
+	}
+	return Result;
+
+}
 
 vector<Candidate> Admin::search_candidate_by_name(const string& name) {
 	vector<Candidate> Result;
@@ -152,7 +164,19 @@ vector<Candidate> Admin::get_Candidates() {
 
 void Admin::display_candidates() {
 	for (int i = 0; i < List_of_candidates.size(); i++) {
-		cout << i + 1 << "" << List_of_candidates[i].get_name() << endl;
+		cout << i + 1 << " - " << List_of_candidates[i].get_name() <<" " << List_of_candidates[i].get_age()<<" ";
+		if (List_of_candidates[i].get_rating() != 0) {
+			cout << List_of_candidates[i].get_rating() << endl;
+		}
+		else {
+			cout << endl;
+		}
+	}
+}
+
+void Admin::display_employees() {
+	for (int i = 0; i < List_of_employees.size(); i++) {
+		cout << i + 1 << " - " << List_of_employees[i].get_name() << " " << List_of_employees[i].get_age() << " " << List_of_employees[i].get_phoneNumber() << " "<< List_of_employees[i].get_email()<<" "<< List_of_employees[i].get_Position() << endl;;
 	}
 }
 
@@ -164,6 +188,7 @@ void Admin::show_info(Candidate obj) {
 	obj.display_info();
 }
 
+//Assess candidates by their skills
 void Admin::recruitment(vector<string>& skills_required) {
 	for (int i = 0; i < List_of_candidates.size(); i++) {
 		int relevant_slkills = 0;
@@ -181,12 +206,13 @@ void Admin::recruitment(vector<string>& skills_required) {
 	}
 }
 
-//This two functions delete inappropriate candidates
+//This two functions delete inappropriate candidates and add suitable candidates into a new vector, and sort them according to their rating
 void Admin::Sort_candidates_by_requirements(int experience_required, int minimal_rating) {
 	for (int i = 0; i < List_of_candidates.size(); i++) {
 		if ((List_of_candidates[i].get_experience() >= experience_required && List_of_candidates[i].get_rating() >= minimal_rating)) {
 			List_of_prommising_Candidates.push_back(List_of_candidates[i]);
 			List_of_candidates[i].set_status(true);
+			List_of_candidates.erase(List_of_candidates.begin() + i);
 		}
 	}
 	sort_Candidates_By_Rating(List_of_prommising_Candidates);
@@ -197,6 +223,7 @@ void Admin::Sort_candidates_by_requirements(int minimal_rating) {
 		if (List_of_candidates[i].get_rating() >= minimal_rating) {
 			List_of_prommising_Candidates.push_back(List_of_candidates[i]);
 			List_of_candidates[i].set_status(true);
+			List_of_candidates.erase(List_of_candidates.begin() + i);
 		}
 	}
 	sort_Candidates_By_Rating(List_of_prommising_Candidates);
@@ -253,4 +280,24 @@ bool Admin::compare_Candidates(Candidate& a, Candidate& b) {
 // Function to sort the vector of candidates by rating
 void Admin::sort_Candidates_By_Rating(vector<Candidate>& candidates) {
 	sort(candidates.begin(), candidates.end(), compare_Candidates);
+}
+
+bool Admin::is_contract_valid(Employee obj) {
+	int current_year = get_current_year();
+	if (obj.get_Contract_duration() < current_year - obj.get_year_of_enrolling()) {
+		return false;
+	}
+
+	return true;
+}
+
+void Prolong_contract(Employee obj, int year) {
+	obj.set_Contract_duration(year);
+}
+
+static int get_current_year() {
+	time_t now = time(0);
+	tm* currentTime = localtime(&now);
+
+	int currentYear = currentTime->tm_year + 1900;
 }
