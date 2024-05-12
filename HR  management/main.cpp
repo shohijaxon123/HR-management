@@ -7,6 +7,8 @@
 using namespace std;
 
 
+Admin admin;
+
 int main()
 {
 	vector<string> skills_emp1 = { "CSS", "HTML" };
@@ -14,7 +16,6 @@ int main()
 	vector<string> skills_emp3= { "Java", "Python", "Git" };
 	vector<string> requirements = { "C++", "HTML", "Python", "Java", "CSS"};
 
-	Admin admin;
 	Candidate candidate1 = admin.create_candidate();
 	vector<string> Skills = { "C++", "Html", "Python", "Java"};
 	candidate1.calculate_rating(Skills);
@@ -29,19 +30,8 @@ int main()
 		cout<< "Rating of "<< admin.get_Candidates()[i].get_name()<< " is: " << admin.get_Candidates()[i].get_rating() << endl;
 	}
 
-
-
-	//Candidate candidate1 = admin.create_candidate();
-	//admin.show_info(candidate1);
-
 	admin.Write_canditate_to_file(candidate1);
 	admin.Read_canditate_from_file();
-	//admin.display_candidates();
-
-	
-	//admin.recruitment(Skills);
-	//cout<<admin.get_Candidates()[0].get_rating() << endl;
-	//Candidate obj("dan", 19, "xxx", "xxx", "xxx", 2, skills_emp);
 
 
 	return 0;

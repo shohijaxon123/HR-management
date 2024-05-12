@@ -22,6 +22,7 @@ public:
 		Email = "";
 		Phone_number = "";
         Contract_duration = 0;
+        Year_of_enrolling = 0;
 		Position = "";
 		Salary = 0.0;
 	}
@@ -58,7 +59,7 @@ public:
     void set_Position(string pos);
     void set_Salary(double salary);
     void set_new_Contract_duration(int new_date);
-
+    void set_Contract_duration(int year);
     // Getters
     int get_Contract_duration();
     string get_Position();
@@ -74,9 +75,17 @@ void Employee::set_Position(string pos){
 void Employee::set_Salary(double salary){
     Salary = salary;
 }
-void Employee::set_new_Contract_duration(int new_date){
-    Contract_duration = new_date;
+void Employee::set_new_Contract_duration(int new_date) {
+    if (new_date > 0) {
+        Contract_duration = new_date;
+    }
 }
+void Employee::set_Contract_duration(int year) {
+    if (year > 0) {
+        Contract_duration = year;
+    }
+}
+
 
 // Getters
 int Employee::get_Contract_duration(){

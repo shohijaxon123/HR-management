@@ -16,7 +16,10 @@ class Admin{
 private:
 	vector<Candidate>List_of_candidates;
 	vector<Employee>List_of_employees;
-	//vector<Candidate>List_of_prommising_Candidates;
+	vector<Candidate>List_of_prommising_Candidates;
+
+	bool compare_Candidates(Candidate& a, Candidate& b);
+	void sort_Candidates_By_Rating(vector<Candidate>& candidates);
 public:
 
 	/*~Admin() {
@@ -50,6 +53,9 @@ public:
 
 	void Write_canditate_to_file(Candidate& candidate);
 	void Read_canditate_from_file();
+
+
+	
 
 };
 
@@ -178,26 +184,26 @@ void Admin::recruitment(vector<string>& skills_required) {
 //This two functions delete inappropriate candidates
 void Admin::Sort_candidates_by_requirements(int experience_required, int minimal_rating) {
 	for (int i = 0; i < List_of_candidates.size(); i++) {
-		if (!(List_of_candidates[i].get_experience() >= experience_required && List_of_candidates[i].get_rating() >= minimal_rating)) {
-			List_of_candidates.erase(List_of_candidates.begin() + i);
-		}
-		else {
+		if ((List_of_candidates[i].get_experience() >= experience_required && List_of_candidates[i].get_rating() >= minimal_rating)) {
+			List_of_prommising_Candidates.push_back(List_of_candidates[i]);
 			List_of_candidates[i].set_status(true);
 		}
 	}
+	sort_Candidates_By_Rating(List_of_prommising_Candidates);
 }
 
 void Admin::Sort_candidates_by_requirements(int minimal_rating) {
 	for (int i = 0; i < List_of_candidates.size(); i++) {
-		if (!(List_of_candidates[i].get_rating() >= minimal_rating)) {
-			List_of_candidates.erase(List_of_candidates.begin() + i);
-		}
-		else {
+		if (List_of_candidates[i].get_rating() >= minimal_rating) {
+			List_of_prommising_Candidates.push_back(List_of_candidates[i]);
 			List_of_candidates[i].set_status(true);
 		}
 	}
+	sort_Candidates_By_Rating(List_of_prommising_Candidates);
 }
 
+//Loop to traverse vector List of promissing candidates
+//Use fu nction search_candidate_by_name
 
 void Admin::Write_canditate_to_file(Candidate& candidate)
 {
@@ -234,8 +240,17 @@ void Admin::Read_canditate_from_file()
 			cout << "Name: " << name << endl;
 			cout << "Rating: " << rating << endl;
 		}
-
 	}
 	infile.close();
+}
 
+
+// Custom comparison function for sorting candidates by rating in descending order
+bool Admin::compare_Candidates(Candidate& a, Candidate& b) {
+	return a.get_rating() > b.get_rating(); // Higher rating first
+}
+
+// Function to sort the vector of candidates by rating
+void Admin::sort_Candidates_By_Rating(vector<Candidate>& candidates) {
+	sort(candidates.begin(), candidates.end(), compare_Candidates);
 }
