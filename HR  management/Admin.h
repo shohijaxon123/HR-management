@@ -30,6 +30,8 @@ public:
 	Candidate create_candidate();
 	//Create Candidate and indicate skills beforehand
 	Candidate create_candidate(vector<string>& skills);
+	//Create candidate with all parametres
+	Candidate create_candidate(const string& Name, unsigned int Age, string Address, string Phone_number, string Email, int Experience, vector<string>& skills);
 
 	vector<Candidate> search_candidate_by_name(const string& name);
 
@@ -50,6 +52,15 @@ public:
 	void Read_canditate_from_file();
 
 };
+
+//Create candidate with all parametres
+Candidate Admin::create_candidate(const string& Name, unsigned int Age, string Address, string Phone_number, string Email, int Experience, vector<string>& skills) {
+	Candidate cand(Name, Age, Address, Email, Phone_number, Experience, skills);
+	List_of_candidates.push_back(cand);
+	List_of_candidates.shrink_to_fit();
+	return cand;
+}
+
 
 //Create Employee (enter all the data from a console)
 Employee Admin::create_employee() {
