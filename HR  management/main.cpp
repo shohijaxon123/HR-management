@@ -10,10 +10,14 @@ using namespace std;
 int main()
 {
 	Admin admin;
-	//Candidate candidate1 = admin.create_candidate();
-	//admin.show_info(candidate1);
+	Candidate candidate1 = admin.create_candidate();
 	vector<string> Skills = { "C++", "Html", "Python", "Java"};
+	candidate1.calculate_rating(Skills);
+	admin.show_info(candidate1);
 
+
+	admin.Write_canditate_to_file(candidate1);
+	admin.Read_canditate_from_file();
 	//admin.display_candidates();
 
 	//vector<string> skills_emp = { "C++", "Html" };
