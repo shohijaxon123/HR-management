@@ -15,10 +15,10 @@ int main()
 	vector<string> requirements = { "C++", "HTML", "Python", "Java", "CSS"};
 
 	Admin admin;
-	Candidate candidate1 = admin.create_candidate();
+	/*Candidate candidate1 = admin.create_candidate();
 	vector<string> Skills = { "C++", "Html", "Python", "Java"};
 	candidate1.calculate_rating(Skills);
-	admin.show_info(candidate1);
+	admin.show_info(candidate1);*/
 
 	admin.create_candidate("Dan", 20, "xxx", "xxx", "XXX", 1, skills_emp1);
 	admin.create_candidate("Max", 20, "xxx", "xxx", "XXX", 2, skills_emp2);
@@ -34,7 +34,7 @@ int main()
 	//Candidate candidate1 = admin.create_candidate();
 	//admin.show_info(candidate1);
 
-	admin.Write_canditate_to_file(candidate1);
+	admin.Write_canditate_to_file();
 	admin.Read_canditate_from_file();
 	//admin.display_candidates();
 

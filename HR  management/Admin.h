@@ -48,7 +48,7 @@ public:
 	void Sort_candidates_by_requirements(int experience_required, int manimal_rating);
 	void Sort_candidates_by_requirements(int minimal_rating);
 
-	void Write_canditate_to_file(Candidate& candidate);
+	void Write_canditate_to_file();
 	void Read_canditate_from_file();
 
 };
@@ -199,9 +199,10 @@ void Admin::Sort_candidates_by_requirements(int minimal_rating) {
 }
 
 
-void Admin::Write_canditate_to_file(Candidate& candidate)
+
+void Admin::Write_canditate_to_file()
 {
-	
+	Candidate candidate;
 	ofstream outfile("Candidate.dat", ios::app);
 	if (!outfile.is_open())
 	{
@@ -209,12 +210,15 @@ void Admin::Write_canditate_to_file(Candidate& candidate)
 	}
 	else
 	{
-		outfile << candidate.get_name() << " - " << candidate.get_rating() << endl;
+		for (auto& candidate:List_of_candidates)
+		{
+			outfile << candidate.get_name() << "-" << candidate.get_rating() << endl;
+			cout << "Candidate " << candidate.get_name() << " added to the file" << endl;
+		}
 		
 	}
 	outfile.close();
 }
-
 
 void Admin::Read_canditate_from_file()
 {
@@ -223,7 +227,7 @@ void Admin::Read_canditate_from_file()
 	int rating;
 	if (!infile.is_open())
 	{
-		cout<< "Error opening file for reading" << endl;
+		cout << "Error opening file for reading" << endl;
 	}
 	else
 	{
@@ -239,3 +243,4 @@ void Admin::Read_canditate_from_file()
 	infile.close();
 
 }
+
