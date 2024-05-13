@@ -1,14 +1,16 @@
 #pragma once
 #include <iostream>
-#include<cstring>
 #include <string>
 #include <regex>
 #include<vector>
+#include <algorithm>
 
 using namespace std;
 
 
-const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+"); 
+const regex email_pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+"); 
+const regex Name_pattern("[a-zA-Z]+");
+const regex  Phone_number_pattern("\\+\\d{12}");
   
 
 class Person{
@@ -60,9 +62,14 @@ public:
 // Person class member functions
 
 //Setters
-void Person::set_name(const string& name){
-	//regex needed
-	Name = name;
+void Person::set_name(const string& name) {
+	if (regex_match(name, Name_pattern)) {
+		Name = name;
+	}
+	else {
+		Name = "Unknown";
+	}
+	
 }
 void Person::set_age(unsigned int age){
 	if (age > 0 && age < 120)
@@ -74,16 +81,19 @@ void Person::set_address(string address){
 	Address = address;
 }
 void Person::set_email(string email){
-	if (regex_match(email, pattern))
+	if (regex_match(email, email_pattern))
 		Email = email;
 	else{
 		Email = "";
-		//Exception handling
 	}
 }
 void Person::set_phoneNumber(string num){
-	//regex needed
-	Phone_number = num;
+	if (regex_match(num, Phone_number_pattern)) {
+		Phone_number = num;
+	}
+	else {
+		Phone_number = "Unknown";
+	}
 }
 
 //Getters
