@@ -272,4 +272,6 @@ void Prelimenary_data() {
 	admin.Read_canditate_from_file();
 	cout << "\n" << endl;
 	
+	admin.Clear_file();
+
 }	
