@@ -49,6 +49,8 @@ public:
 
 	void Write_canditate_to_file();
 	void Read_canditate_from_file();
+	void Clear_file();
+
 
 	bool is_contract_valid(Employee obj);
 	void Prolong_contract(Employee obj, int year);
@@ -272,7 +274,7 @@ void Admin::Sort_candidates_by_requirements(double experience_required, int mini
 }
 
 //Loop to traverse vector List of promissing candidates
-//Use fu nction search_candidate_by_name
+//Use function search_candidate_by_name
 
 
 void Admin::Write_canditate_to_file()
@@ -317,6 +319,13 @@ void Admin::Read_canditate_from_file()
 	infile.close();
 }
 
+void Admin::Clear_file()
+{
+	ofstream file("Candidates.dat");
+	file.close();
+	cout << "File cleared" << endl;
+
+}
 
 // Custom comparison function for sorting candidates by rating in descending order
 void Admin::compare_Candidates(Candidate& first, Candidate& second){
