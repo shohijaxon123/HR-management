@@ -27,7 +27,7 @@ public:
     }
 
     //Parametrized constructor without skills
-    Candidate(const string& name, unsigned int age,string number, string email, int exp) : Person(name, age, email, number){
+    Candidate(const string& name, unsigned int age, string email, string number, int exp) : Person(name, age, email, number){
         ID = Count++;
         this->set_name(name);
         this->set_age(age);
@@ -40,7 +40,7 @@ public:
     //Parametrized constructor with skills
     // skill vector is a reference WARNING
 
-    Candidate(const string& name, unsigned int age,  string number,string email, int exp, vector<string> skills) : Person(name, age, email, number){
+    Candidate(const string& name, unsigned int age,  string email, string number, int exp, vector<string> skills) : Person(name, age, email, number){
         ID = Count++;
         this->set_name(name);
         this->set_age(age);
@@ -96,7 +96,7 @@ void Candidate::set_skills(){
     {
         cout << "Enter your skill : "; cin >> skill;
         if (skill != "stop") {
-            Skills.push_back(skill);
+            Skills.push_back(toLowerCase(skill));
     }
         
         

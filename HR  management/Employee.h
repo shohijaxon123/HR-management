@@ -71,7 +71,7 @@ public:
     int get_year_of_enrolling();
 };
 
-int Employee::Count = 1;
+int Employee::Count = 0;
 
 //Setters
 

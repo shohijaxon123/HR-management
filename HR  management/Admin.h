@@ -69,7 +69,7 @@ public:
 
 
 //Create candidate with all parametres
-Candidate Admin::create_candidate(const string& Name, unsigned int Age, string Phone_number, string Email, int Experience, vector<string>& skills) {
+Candidate Admin::create_candidate(const string& Name, unsigned int Age, string Email, string Phone_number, int Experience, vector<string>& skills) {
 	Candidate cand(Name, Age, Email, Phone_number, Experience, skills);
 	List_of_candidates.push_back(cand);
 	List_of_candidates.shrink_to_fit();
@@ -123,13 +123,21 @@ Candidate Admin::create_candidate() {
 
 //delete candidtes
 void Admin::delete_candidate(int& id) {
-	vector<Candidate> cand_to_delete = this->search_candidate_by_id(id);
-	if (cand_to_delete.empty()) {
+	
+	if (this->search_candidate_by_id(id).empty()) {
 		cout << "No such candidate!\n" << endl;
 	}
 	else {
-		List_of_candidates.erase(cand_to_delete.begin());
-		List_of_candidates.shrink_to_fit();
+		vector<Candidate> del; 
+		for (int i = 0; i < List_of_candidates.size(); i++){
+			if (List_of_candidates[i].get_ID() == this->search_candidate_by_id(id)[0].get_ID()) {
+				continue;
+			}
+			else {
+				del.push_back(List_of_candidates[i]);
+			}
+		}
+		List_of_candidates = del;
 	}
 }
 
@@ -147,13 +155,21 @@ void Admin::delete_candidate_by_obj(Candidate obj) {
 
 //delete employee
 void Admin::delete_employee(int& ID) {
-	vector<Employee> empl_to_delete = this->search_employee_by_id(ID);
-	if (empl_to_delete.empty()) {
-		cout << "No such employee!\n" << endl;
+	
+	if (this->search_employee_by_id(ID).empty()) {
+		cout << "No such candidate!\n" << endl;
 	}
 	else {
-		List_of_employees.erase(empl_to_delete.begin());
-		List_of_employees.shrink_to_fit();
+		vector<Employee> del;
+		for (int i = 0; i < List_of_employees.size(); i++) {
+			if (List_of_employees[i].get_id() == this->search_employee_by_id(ID)[0].get_id()) {
+				continue;
+			}
+			else {
+				del.push_back(List_of_employees[i]);
+			}
+		}
+		List_of_employees = del;
 	}
 }
 
@@ -228,7 +244,7 @@ void Admin::display_employees() {
 	}
 	else {
 		for (int i = 0; i < List_of_employees.size(); i++) {
-			cout << "ID: " << List_of_employees[i].get_id() << " - " << List_of_employees[i].get_name() << " - Age: " << List_of_employees[i].get_age() << " years; " << List_of_employees[i].get_phoneNumber() << "; " << List_of_employees[i].get_email() << "/nPosition: " << List_of_employees[i].get_Position() << endl;;
+			cout << "ID: " << List_of_employees[i].get_id() << " - " << List_of_employees[i].get_name() << " - Age: " << List_of_employees[i].get_age() << " years; " << List_of_employees[i].get_phoneNumber() << "; " << List_of_employees[i].get_email() << "\nPosition: " << List_of_employees[i].get_Position() << endl;;
 		}
 	}
 }
@@ -247,14 +263,14 @@ void Admin::recruitment(vector<string>& skills_required) {
 		int relevant_slkills = 0;
 		for (int j = 0; j < skills_required.size(); j++) {
 			for (int k = 0; k < List_of_candidates[i].get_skills().size(); k++) {
-				if (skills_required[j] == List_of_candidates[i].get_skills()[k]) {
+				if (toLowerCase(skills_required[j]) == toLowerCase(List_of_candidates[i].get_skills()[k])) {
 					relevant_slkills++;
 					break;
 				}
 			}
 		}
 
-		int rating = (int)ceil(10 * relevant_slkills / skills_required.size());
+		int rating = (int)(10 * relevant_slkills / skills_required.size());
 		List_of_candidates[i].set_rating(rating);
 	}
 }
@@ -265,7 +281,6 @@ void Admin::Sort_candidates_by_requirements(double experience_required, int mini
 		if ((List_of_candidates[i].get_experience() >= experience_required && List_of_candidates[i].get_rating() >= minimal_rating)) {
 			List_of_prommising_Candidates.push_back(List_of_candidates[i]);
 			List_of_candidates[i].set_status(true);
-			List_of_candidates.erase(List_of_candidates.begin() + i);
 		}
 	}
 	sort_Candidates_By_Rating();
@@ -363,3 +378,6 @@ int Admin::get_current_year() {
 
 	return currentYear;
 }
+
+
+

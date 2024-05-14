@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
 #include<chrono>
+#include<cctype>
 #include <string>
 #include <regex>
 #include<vector>
-#include <algorithm>
+//#include <algorithm>
 
 using namespace std;
 
@@ -151,4 +152,13 @@ void Person::display_info_of_person(){
 	cout<< "Age: " << Age << endl;
 	cout<< "Phone Number: " << Phone_number << endl;
 	cout<< "Email address: " << Email << endl;
+}
+
+string toLowerCase(const string& str) {
+	string result = str;
+
+	for (char& c : result) {
+		c = tolower(c);
+	}
+	return result;
 }
