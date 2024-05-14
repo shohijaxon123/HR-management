@@ -211,7 +211,7 @@ void Admin::display_candidates() {
 	}
 	else {
 		for (int i = 0; i < List_of_candidates.size(); i++) {
-			cout << List_of_candidates[i].get_ID() << " - " << List_of_candidates[i].get_name() << " Age: " << List_of_candidates[i].get_age() << " ";
+			cout <<"ID: "<< List_of_candidates[i].get_ID() << " - " << List_of_candidates[i].get_name() << "; Age: " << List_of_candidates[i].get_age() << "; Experience: "<< List_of_candidates[i].get_experience()<< " years ";
 			if (List_of_candidates[i].get_rating() != 0) {
 				cout << List_of_candidates[i].get_rating() << endl;
 			}
@@ -278,16 +278,16 @@ void Admin::Sort_candidates_by_requirements(double experience_required, int mini
 void Admin::Write_canditate_to_file()
 {
 	Candidate candidate;
-	ofstream outfile("Candidate.dat", ios::app);
+	ofstream outfile("Candidates.dat", ios::app);
 	if (!outfile.is_open())
 	{
 		cout << "Error opening file for writing" << endl;
 	}
 	else
 	{
-		for (auto& candidate:List_of_candidates)
+		for (auto& candidate: List_of_prommising_Candidates)
 		{
-			outfile << candidate.get_name() << "-" << candidate.get_rating() << endl;
+			outfile<<candidate.get_name() << "-" << candidate.get_rating() << endl;
 			cout << "Candidate " << candidate.get_name() << " added to the file" << endl;
 		}
 		
@@ -297,7 +297,7 @@ void Admin::Write_canditate_to_file()
 
 void Admin::Read_canditate_from_file()
 {
-	ifstream infile("Candidate.dat", ios::app);
+	ifstream infile("Candidates.dat", ios::app);
 	string name;
 	int rating;
 	if (!infile.is_open())
@@ -310,7 +310,7 @@ void Admin::Read_canditate_from_file()
 		{
 			infile >> rating;
 			infile.ignore();
-			cout << "Name: " << name << endl;
+			cout << "Name: " << name << "\t";
 			cout << "Rating: " << rating << endl;
 		}
 	}

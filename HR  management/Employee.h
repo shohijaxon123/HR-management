@@ -9,15 +9,16 @@ const double TAX_RATE = 0.12;
 class Employee:public Person
 {
 private:
-    static int ID;
+    int ID;
     int Year_of_enrolling;
 	string Position;
 	double Salary;
     int Contract_duration;
 public:
+    static int Count;
 	// Default constructor
 	Employee() : Person(){
-        ID++;
+        ID = Count++;
 		Name = "Unknown";
 		Age = 0;
 		Email = "";
@@ -29,7 +30,7 @@ public:
 	}
 
 	Employee(const string& name, unsigned int age, string email, string number, int year_of_enrolling, string position, int duration, double salary) : Person(name, age, email, number){
-        ID++;
+        ID = Count++;
         this->set_name(name);
         this->set_age(age);
         this->set_email(email);
@@ -70,7 +71,7 @@ public:
     int get_year_of_enrolling();
 };
 
-int Employee::ID = 1;
+int Employee::Count = 1;
 
 //Setters
 

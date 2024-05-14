@@ -3,6 +3,7 @@
 #include"Admin.h"
 #include"Employee.h"
 #include"Candidate.h"
+#include"Person.h"
 
 using namespace std;
 
@@ -24,14 +25,8 @@ int main()
 	vector<Employee> employee_vec;
 	Candidate cand_obj;
 	Employee empl_obj;
-	
-	/*for (int i = 0; i < 3; i++) {
-		admin.recruitment(requirements);
-		cout<< "Rating of "<< admin.get_Candidates()[i].get_name()<< " is: " << admin.get_Candidates()[i].get_rating() << endl;
-	}*/
-	
-	//admin.Write_canditate_to_file();
-	//admin.Read_canditate_from_file();
+
+
 		
 	int choice;
 	
@@ -180,7 +175,7 @@ int main()
 			cout << "Good Bye!!!" << endl;
 			break;
 		case 13:
-
+			Prelimenary_data();
 			break;
 		default:
 			cout << "Wrong comand!!!" << endl;
@@ -233,22 +228,42 @@ vector<string> set_requirements() {
 
 
 void Prelimenary_data() {
+	//Prepared requirements
+	vector<string> requirements3 = { "C++", "HTML", "Python", "Java", "CSS", "Git"}; //6 skills
 
-	vector<string> skills_emp1 = { "CSS", "HTML", "Git" };
-	vector<string> skills_emp2 = { "C++", "SQL", "Fortran" };
-	vector<string> skills_emp3 = { "Java", "Python", "Git" };
-	vector<string> skills_emp4 = { "CSS", "HTML", "SQL", "Django" };
-	vector<string> skills_emp5 = { "C++", "SQL","Git", "Docker" };
-	vector<string> skills_emp6 = { "Java", "Python", "Git" };
+	//Prepared skills for candidates
+	vector<string> skills_emp1 = { "CSS", "HTML" }; // 2 out of 6
+	vector<string> skills_emp2 = { "C++", "Java", "Git" };// 3 out of 6
+	vector<string> skills_emp3 = { "Java", "Python", "Git" }; // 3 out of 6
+	vector<string> skills_emp4 = { "CSS", "HTML", "SQL", "Python" };//3 out of 6
+	vector<string> skills_emp5 = { "C++", "SQL","Git", "Docker" };// 2 out of 6
+	vector<string> skills_emp6 = { "Fortran", "Rust", "Git" };//1 out of s6
 
-	vector<string> requirements1 = { "C++", "SQL", "Django", "Java", "JavaScript" };
-	vector<string> requirements2 = { "C++", "Fortran", "Git", "Docker", };
-	vector<string> requirements3 = { "C++", "HTML", "Python", "Java", "CSS" };
-
-	admin.create_candidate("Daniil", 20, "+998335959043", "danP@gmail.com", 1, skills_emp1);
-	admin.create_candidate("Max", 25, "+998445959053", "shoxR@gmail.com", 3, skills_emp2);
-	admin.create_candidate("Ian", 30, "+998995959043", "KeyL@gmail.com", 7, skills_emp3);
-	admin.create_candidate("Van", 34, "+998335959043", "Van@gmail.com", 8, skills_emp4);
-	admin.create_candidate("Luv", 21, "+998445959053", "Luv@gmail.com", 2, skills_emp5);
-	admin.create_candidate("Ann", 22, "+998995959043", "Ann@gmail.com", 4, skills_emp6);
-}
+	//Prepared candidates
+	Candidate obj1 = admin.create_candidate("Key", 20, "+998335959043", "danP@gmail.com", 1, skills_emp1);
+	Candidate obj2 = admin.create_candidate("Max", 25, "+998445959053", "shoxR@gmail.com", 3, skills_emp2);
+	Candidate obj3 = admin.create_candidate("Ian", 30, "+998995959043", "KeyL@gmail.com", 7, skills_emp3);
+	Candidate obj4 = admin.create_candidate("Van", 34, "+998335959043", "Van@gmail.com", 8, skills_emp4);
+	Candidate obj5 = admin.create_candidate("Luv", 21, "+998445959053", "Luv@gmail.com", 2, skills_emp5);
+	Candidate obj6 = admin.create_candidate("Ann", 22, "+998995959043", "Ann@gmail.com", 4, skills_emp6);
+	
+	cout << "\n" << endl;
+	
+	admin.display_candidates();
+	
+	cout << "\n" << endl;
+	
+	//Set rating to candidates
+	admin.recruitment(requirements3);
+	
+	//Sort candidates according to required experience and skills and accept candidates who satisfied requiremets
+	admin.Sort_candidates_by_requirements(3, 5);
+	
+	//Write accepted candidates to a file
+	admin.Write_canditate_to_file();
+	cout << "\n" << endl;
+	//Take data about accepted candidates from a file
+	admin.Read_canditate_from_file();
+	cout << "\n" << endl;
+	
+}	

@@ -6,16 +6,17 @@ using namespace std;
 
 class Candidate : public Person{
 private:
-    static int ID;
+    int ID;
     vector<string> Skills;
     int Experience;
     bool Accepted;
     int Rating;
 public:
 
+    static int Count;
     //Default constructor
     Candidate(){
-        ID++;
+        ID = Count++;
         Name = "Unknown";
 		Age = 0;
 		Email = "";
@@ -26,8 +27,8 @@ public:
     }
 
     //Parametrized constructor without skills
-    Candidate(const string& name, unsigned int age, string email, string number, int exp) : Person(name, age, email, number){
-        ID++;
+    Candidate(const string& name, unsigned int age,string number, string email, int exp) : Person(name, age, email, number){
+        ID = Count++;
         this->set_name(name);
         this->set_age(age);
         this->set_email(email);
@@ -39,7 +40,8 @@ public:
     //Parametrized constructor with skills
     // skill vector is a reference WARNING
 
-    Candidate(const string& name, unsigned int age, string email, string number, int exp, vector<string> skills) : Person(name, age, email, number){
+    Candidate(const string& name, unsigned int age,  string number,string email, int exp, vector<string> skills) : Person(name, age, email, number){
+        ID = Count++;
         this->set_name(name);
         this->set_age(age);
         this->set_email(email);
@@ -76,7 +78,7 @@ public:
 
 };
 
-int Candidate::ID = 1;
+int Candidate::Count = 0;
 //Setters
 
 void Candidate::set_experience(int exp){
@@ -140,8 +142,6 @@ void Candidate::show_skills(){
     }
     cout << endl;
 }
-
-
 
 //Calculations
 void Candidate::calculate_rating(vector<string>skills) {
