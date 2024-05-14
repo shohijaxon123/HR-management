@@ -25,9 +25,15 @@ public:
 	//Create Candidate and indicate skills beforehand
 	Candidate create_candidate(vector<string>& skills);
 	//Create candidate with all parametres
-	Candidate create_candidate(const string& Name, unsigned int Age, string Address, string Phone_number, string Email, int Experience, vector<string>& skills);
+	Candidate create_candidate(const string& Name, unsigned int Age, string Phone_number, string Email, int Experience, vector<string>& skills);
+	//Delete candidate
+	void delete_candidate(int& id);
+	//Delete employee
+	void delete_employee(int& ID);
+	//delete candidate obj
+	void delete_candidate_by_obj(Candidate obj);
 
-	vector<Candidate> search_candidate_by_email(string email);
+	vector<Candidate> search_candidate_by_id(int& id);
 	vector<Employee> search_employee_by_id(int& id);
 	vector<Candidate> get_Candidates();
 	void display_employees();
@@ -39,21 +45,32 @@ public:
 	void recruitment(vector<string>& skills_required);
 
 	//This two functions delete inappropriate candidates
-	void Sort_candidates_by_requirements(int experience_required, int manimal_rating);
+	void Sort_candidates_by_requirements(double experience_required, int manimal_rating);
 
 	void Write_canditate_to_file();
 	void Read_canditate_from_file();
 
 	bool is_contract_valid(Employee obj);
 	void Prolong_contract(Employee obj, int year);
+
+
 	vector<Candidate>get_List_of_prommising_Candidates() {
 		return List_of_prommising_Candidates;
 	}
+
+
+	bool is_List_of_candidates_empty(){
+		if (List_of_candidates.empty())
+			return false;
+		return true;
+	}
 };
 
+
+
 //Create candidate with all parametres
-Candidate Admin::create_candidate(const string& Name, unsigned int Age, string Address, string Phone_number, string Email, int Experience, vector<string>& skills) {
-	Candidate cand(Name, Age, Address, Email, Phone_number, Experience, skills);
+Candidate Admin::create_candidate(const string& Name, unsigned int Age, string Phone_number, string Email, int Experience, vector<string>& skills) {
+	Candidate cand(Name, Age, Email, Phone_number, Experience, skills);
 	List_of_candidates.push_back(cand);
 	List_of_candidates.shrink_to_fit();
 	return cand;
@@ -62,7 +79,7 @@ Candidate Admin::create_candidate(const string& Name, unsigned int Age, string A
 
 //Create Employee (enter all the data from a console)
 Employee Admin::create_employee() {
-	string Name, Address, Email, Phone_number;
+	string Name, Email, Phone_number;
 	unsigned int Age;
 	int Year_of_enrolling, Contract_duration;
 	string Position;
@@ -71,7 +88,6 @@ Employee Admin::create_employee() {
 	cout << "\nInput data of an employee: " << endl;
 	cout << "Input Name: "; cin >> Name;
 	cout << "Input Age: "; cin >> Age;
-	cout << "Input Address: "; cin >> Address;
 	cout << "Input Email: "; cin >> Email;
 	cout << "Input Phone_number: "; cin >> Phone_number;
 	cout << "Input Year of enroolment: "; cin >> Year_of_enrolling;
@@ -79,7 +95,7 @@ Employee Admin::create_employee() {
 	cout << "Input Position: "; cin >> Position;
 	cout << "Input Salary: "; cin >> Salary;
 
-	Employee emp(Name, Age, Address, Email, Phone_number, Year_of_enrolling, Position, Contract_duration, Salary);
+	Employee emp(Name, Age, Email, Phone_number, Year_of_enrolling, Position, Contract_duration, Salary);
 	List_of_employees.push_back(emp);
 	List_of_employees.shrink_to_fit();
 	return emp;
@@ -87,24 +103,60 @@ Employee Admin::create_employee() {
 
 //create Candidate (enter all the data from a console)
 Candidate Admin::create_candidate() {
-	string Name, Address, Email, Phone_number;
+	string Name, Email, Phone_number;
 	unsigned int Age;
 	vector<string> Skills;
-	int Experience;
+	double Experience;
 	cout << "\nInput data of a candidate: " << endl;
 	cout << "Input Name: "; cin >> Name;
 	cout << "Input Age: "; cin >> Age;
-	cout << "Input Address: "; cin >> Address;
 	cout << "Input Email: "; cin >> Email;
 	cout << "Input Phone_number: "; cin >> Phone_number;
 	cout << "Input Experience in years: "; cin >> Experience;
 
-	Candidate cand(Name, Age, Address, Email, Phone_number, Experience);
+	Candidate cand(Name, Age, Email, Phone_number, Experience);
 	cand.set_skills();
 	List_of_candidates.push_back(cand);
 	List_of_candidates.shrink_to_fit();
 	return cand;
 }
+
+//delete candidtes
+void Admin::delete_candidate(int& id) {
+	vector<Candidate> cand_to_delete = this->search_candidate_by_id(id);
+	if (cand_to_delete.empty()) {
+		cout << "No such candidate!\n" << endl;
+	}
+	else {
+		List_of_candidates.erase(cand_to_delete.begin());
+		List_of_candidates.shrink_to_fit();
+	}
+}
+
+
+//delete candidtes obj
+void Admin::delete_candidate_by_obj(Candidate obj) {
+	for (int i = 0; i < List_of_candidates.size(); i++) {
+		if (obj.get_ID() == List_of_candidates[i].get_ID()) {
+			List_of_candidates.erase(List_of_candidates.begin() + i);
+		}
+	}	
+		List_of_candidates.shrink_to_fit();
+}
+
+
+//delete employee
+void Admin::delete_employee(int& ID) {
+	vector<Employee> empl_to_delete = this->search_employee_by_id(ID);
+	if (empl_to_delete.empty()) {
+		cout << "No such employee!\n" << endl;
+	}
+	else {
+		List_of_employees.erase(empl_to_delete.begin());
+		List_of_employees.shrink_to_fit();
+	}
+}
+
 
 
 //Create Candidate and indicate skills beforehand
@@ -112,16 +164,15 @@ Candidate Admin::create_candidate(vector<string>& skills) {
 	string Name, Address, Email, Phone_number;
 	unsigned int Age;
 	vector<string> Skills;
-	int Experience;
+	double Experience;
 	cout << "\nInput data of a candidate: " << endl;
 	cout << "Input Name: "; cin >> Name;
 	cout << "Input Age: "; cin >> Age;
-	cout << "Input Address: "; cin >> Address;
 	cout << "Input Email: "; cin >> Email;
 	cout << "Input Phone_number: "; cin >> Phone_number;
 	cout << "Input Experience in years: "; cin >> Experience;
 
-	Candidate cand(Name, Age, Address, Email, Phone_number, Experience, skills);
+	Candidate cand(Name, Age, Email, Phone_number, Experience, skills);
 	List_of_candidates.push_back(cand);
 	List_of_candidates.shrink_to_fit();
 	return cand;
@@ -139,10 +190,10 @@ vector<Employee> Admin::search_employee_by_id(int& id) {
 
 }
 
-vector<Candidate> Admin::search_candidate_by_email(string email) {
+vector<Candidate> Admin::search_candidate_by_id(int& id) {
 	vector<Candidate> Result;
 	for (int i = 0; i < List_of_candidates.size(); i++) {
-		if (List_of_candidates[i].get_email() == email) {
+		if (List_of_candidates[i].get_ID() == id) {
 			Result.push_back(List_of_candidates[i]);
 		}
 	}
@@ -155,20 +206,30 @@ vector<Candidate> Admin::get_Candidates() {
 }
 
 void Admin::display_candidates() {
-	for (int i = 0; i < List_of_candidates.size(); i++) {
-		cout << i + 1 << " - " << List_of_candidates[i].get_name() <<" " << List_of_candidates[i].get_age()<<" ";
-		if (List_of_candidates[i].get_rating() != 0) {
-			cout << List_of_candidates[i].get_rating() << endl;
-		}
-		else {
-			cout << endl;
+	if (List_of_candidates.empty()) {
+		cout << "No registrated Candidates!" << endl;
+	}
+	else {
+		for (int i = 0; i < List_of_candidates.size(); i++) {
+			cout << List_of_candidates[i].get_ID() << " - " << List_of_candidates[i].get_name() << " Age: " << List_of_candidates[i].get_age() << " ";
+			if (List_of_candidates[i].get_rating() != 0) {
+				cout << List_of_candidates[i].get_rating() << endl;
+			}
+			else {
+				cout << endl;
+			}
 		}
 	}
 }
 
 void Admin::display_employees() {
-	for (int i = 0; i < List_of_employees.size(); i++) {
-		cout << i + 1 << " - " << "ID: "<< List_of_employees[i].get_id()<< " - " << List_of_employees[i].get_name() << " " << List_of_employees[i].get_age() << " " << List_of_employees[i].get_phoneNumber() << " " << List_of_employees[i].get_email() << " " << List_of_employees[i].get_Position() << endl;;
+	if (List_of_employees.empty()) {
+		cout << "No registrated Employees!" << endl;
+	}
+	else {
+		for (int i = 0; i < List_of_employees.size(); i++) {
+			cout << "ID: " << List_of_employees[i].get_id() << " - " << List_of_employees[i].get_name() << " - Age: " << List_of_employees[i].get_age() << " years; " << List_of_employees[i].get_phoneNumber() << "; " << List_of_employees[i].get_email() << "/nPosition: " << List_of_employees[i].get_Position() << endl;;
+		}
 	}
 }
 
@@ -199,7 +260,7 @@ void Admin::recruitment(vector<string>& skills_required) {
 }
 
 //Add suitable candidates into a new vector, and sort them according to their rating
-void Admin::Sort_candidates_by_requirements(int experience_required, int minimal_rating) {
+void Admin::Sort_candidates_by_requirements(double experience_required, int minimal_rating) {
 	for (int i = 0; i < List_of_candidates.size(); i++) {
 		if ((List_of_candidates[i].get_experience() >= experience_required && List_of_candidates[i].get_rating() >= minimal_rating)) {
 			List_of_prommising_Candidates.push_back(List_of_candidates[i]);

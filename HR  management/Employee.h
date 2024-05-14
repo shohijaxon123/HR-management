@@ -20,7 +20,6 @@ public:
         ID++;
 		Name = "Unknown";
 		Age = 0;
-		Address = "";
 		Email = "";
 		Phone_number = "";
         Contract_duration = 0;
@@ -29,13 +28,12 @@ public:
 		Salary = 0.0;
 	}
 
-	Employee(const string& name, unsigned int age, string address, string email, string number, int year_of_enrolling, string position, int duration, double salary) : Person(name, age, address, email, number){
+	Employee(const string& name, unsigned int age, string email, string number, int year_of_enrolling, string position, int duration, double salary) : Person(name, age, email, number){
         ID++;
-        Name = name;
-		Age = age;
-		Address = address;
-		Email = email;
-		Phone_number = number;
+        this->set_name(name);
+        this->set_age(age);
+        this->set_email(email);
+        this->set_phoneNumber(number);
 		Position = position;
         Year_of_enrolling = year_of_enrolling;
         Contract_duration = duration;

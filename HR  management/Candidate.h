@@ -1,11 +1,12 @@
 #pragma once
 #include"Person.h"
-
+#include"Admin.h"
 using namespace std;
 
 
 class Candidate : public Person{
 private:
+    static int ID;
     vector<string> Skills;
     int Experience;
     bool Accepted;
@@ -14,9 +15,9 @@ public:
 
     //Default constructor
     Candidate(){
+        ID++;
         Name = "Unknown";
 		Age = 0;
-		Address = "";
 		Email = "";
 		Phone_number = "";
         Experience = 0;
@@ -25,12 +26,12 @@ public:
     }
 
     //Parametrized constructor without skills
-    Candidate(const string& name, unsigned int age, string address, string email, string number, int exp) : Person(name, age, address, email, number){
-        Name = name;
-		Age = age;
-		Address = address;
-		Email = email;
-		Phone_number = number;
+    Candidate(const string& name, unsigned int age, string email, string number, int exp) : Person(name, age, email, number){
+        ID++;
+        this->set_name(name);
+        this->set_age(age);
+        this->set_email(email);
+        this->set_phoneNumber(number);
         Experience = exp;
         Accepted = false;
         Rating = 0;
@@ -38,12 +39,11 @@ public:
     //Parametrized constructor with skills
     // skill vector is a reference WARNING
 
-    Candidate(const string& name, unsigned int age, string address, string email, string number, int exp, vector<string> skills) : Person(name, age, address, email, number){
-        Name = name;
-		Age = age;
-		Address = address;
-		Email = email;
-		Phone_number = number;
+    Candidate(const string& name, unsigned int age, string email, string number, int exp, vector<string> skills) : Person(name, age, email, number){
+        this->set_name(name);
+        this->set_age(age);
+        this->set_email(email);
+        this->set_phoneNumber(number);
         Experience = exp;
         Skills = skills;
         Accepted = false;
@@ -67,7 +67,8 @@ public:
     int get_experience();
     bool get_status();
     int get_rating();
-   
+    int get_ID();
+
     void show_skills();
 
     void calculate_rating(vector<string>skills);
@@ -75,6 +76,7 @@ public:
 
 };
 
+int Candidate::ID = 1;
 //Setters
 
 void Candidate::set_experience(int exp){
@@ -119,13 +121,17 @@ bool Candidate::get_status(){
 int Candidate::get_rating() {
     return Rating;
 }
+int Candidate::get_ID() {
+    return ID;
+}
 
 //Display functions
 void Candidate::display_info(){
-        Person::display_info_of_person();
-        cout<<"Experience: "<< Experience<<" years"<<endl;
-        cout<<"Accepted: "<< Accepted <<endl;
-        cout << "Skills:\n"; this->show_skills();
+    cout << "ID: " << ID << endl;
+    Person::display_info_of_person();
+    cout<<"Experience: "<< Experience<<" years"<<endl;
+    cout<<"Accepted: "<< Accepted <<endl;
+    cout << "Skills:\n"; this->show_skills();
     }
 
 void Candidate::show_skills(){
