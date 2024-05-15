@@ -110,7 +110,9 @@ Candidate Admin::create_candidate() {
 	vector<string> Skills;
 	double Experience;
 	cout << "\nInput data of a candidate: " << endl;
-	cout << "Input Name: "; cin >> Name;
+	cin.ignore();
+	cout << "Input Name: ";
+	getline(cin, Name);
 	cout << "Input Age: "; cin >> Age;
 	cout << "Input Email: "; cin >> Email;
 	cout << "Input Phone_number: "; cin >> Phone_number;
@@ -295,7 +297,7 @@ void Admin::Sort_candidates_by_requirements(double experience_required, int mini
 void Admin::Write_canditate_to_file()
 {
 	Candidate candidate;
-	ofstream outfile("Candidates.txt", ios::app);
+	ofstream outfile("Candidates.dat", ios::app);
 	if (!outfile.is_open())
 	{
 		cout << "Error opening file for writing" << endl;
@@ -304,11 +306,11 @@ void Admin::Write_canditate_to_file()
 	{
 		for (auto& candidate: List_of_prommising_Candidates)
 		{
-			outfile << "ID: " << candidate.get_ID() << "\t";
-			outfile << "Name: " << candidate.get_name() << "\t";
-			outfile << "Email: " << candidate.get_email() << "\t";
-			outfile << "Phone number: " << candidate.get_phoneNumber() << "\t";
-			outfile << "Rating: " << candidate.get_rating() << endl;
+			outfile << "ID: " << candidate.get_ID() <<endl;
+			outfile << "Name: " << candidate.get_name() <<endl;
+			outfile << "Email: " << candidate.get_email() << endl;
+			outfile << "Phone number: " << candidate.get_phoneNumber() << endl;
+			outfile << "Rating: " << candidate.get_rating() << endl;;
 			cout << "Candidate " << candidate.get_name() << " added to the file" << endl;
 		}
 		
@@ -318,9 +320,9 @@ void Admin::Write_canditate_to_file()
 
 void Admin::Read_canditate_from_file()
 {
-	ifstream infile("Candidates.txt", ios::app);
-	string name;
-	int rating;
+	ifstream infile("Candidates.dat");
+	//string name;
+	//int rating;
 	if (!infile.is_open())
 	{
 		cout << "Error opening file for reading" << endl;
@@ -329,46 +331,41 @@ void Admin::Read_canditate_from_file()
 	{
 		string line;
 		cout << "Reading from file:" << endl;
-		while (getline(infile, line))
+		string str, ID, name, email, phonenumber, rating;
+		while (!infile.eof())
 		{
-			string ID, name, email, phonenumber, rating;
+			ID="", name="", email="", phonenumber="", rating="";
+			//infile >> ID;
+			//infile.ignore();
 
-			infile >> ID;
-			infile.ignore();
-			getline(infile, ID, '\t');
 
-			infile >> name;
-			infile.ignore();
-			getline(infile, name, '\t');
-
-			infile >> email;
-			infile.ignore();
-			getline(infile, email, '\t');
-
-			infile >> phonenumber;
-			infile.ignore();
-			getline(infile, phonenumber, '\t');
-
-			infile >> rating;
-			infile.ignore();
+			getline(infile, ID);
+			cout << ID << endl;
+			//infile >> name;
+			//infile.ignore();
+			getline(infile, name);
+			cout << name << endl;
+			//infile >> email;
+			//infile.ignore();
+			getline(infile, email);
+			cout << email << endl;
+			//infile >> phonenumber;
+			//infile.ignore();
+			getline(infile, phonenumber);
+			cout<< phonenumber << endl;
+			//infile >> rating;
+			//infile.ignore();
 			getline(infile, rating);
-
-			cout << "ID: " << ID << "\t";
-			cout << "Name: " << name << "\t";
-			cout << "Email: " << email << "\t";
-			cout << "Phone Number: " << phonenumber << "\t";
-			cout << "Rating: " << rating << endl;
-		}
-		
+			cout<< rating <<endl;
 			
-		
+		}
 	}
 	infile.close();
 }
 
 void Admin::Clear_file()
 {
-	ofstream file("Candidates.txt");
+	ofstream file("Candidates.dat");
 	file.close();
 	cout << "File was cleared!" << endl;
 

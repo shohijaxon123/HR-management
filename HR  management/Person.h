@@ -10,7 +10,7 @@
 using namespace std;
 
 const regex email_pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+"); 
-const regex Name_pattern("[a-zA-Z]+");
+const regex Name_pattern("^[A-Za-z ]+$");
 const regex  Phone_number_pattern("\\+\\d{12}");
   
 class Person{
@@ -36,13 +36,13 @@ public:
 
 
 	//Input validation
-	 static bool validate_name(const string& name);
+	 static bool validate_name(string name);
 	 static bool validate_email(string email);
 	 static bool validate_age(unsigned int age);
 	 static bool validate_Phonenumber(string num);
 
 	//setters
-	void set_name(const string& name);
+	void set_name(string name);
 	void set_age(unsigned int age);
 	void set_email(string email);
 	void set_phoneNumber(string num);
@@ -58,7 +58,7 @@ public:
 // Person class member functions
 
 //Input validation
-bool Person::validate_name(const string& name) {
+bool Person::validate_name(string name) {
 	if (regex_match(name, Name_pattern)) {
 		return 1;
 	}
@@ -98,7 +98,7 @@ bool Person::validate_Phonenumber(string num) {
 }
 
 //Setters
-void Person::set_name(const string& name) {
+void Person::set_name(string name) {
 	if (validate_name(name) == 1) {
 		Name = name;
 	}
