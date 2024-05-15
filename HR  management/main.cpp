@@ -174,7 +174,6 @@ int main()
 			break;
 		case 14:
 			admin.Clear_file();
-			cout << "File was cleared!" << endl;
 			break;
 		default:
 			cout << "Wrong comand!!!" << endl;
@@ -241,9 +240,9 @@ void Prelimenary_data() {
 	vector<string> skills_emp6 = { "Fortran", "Rust", "Git" };//1 out of s6
 
 	//Prepared candidates
-	Candidate obj1 = admin.create_candidate("Key", 20,  "danP@gmail.com", "+998335959043",  1, skills_emp1);
+	Candidate obj1 = admin.create_candidate("Key Jane", 20,  "KEY_j@gmail.com", "+998335959043",  1, skills_emp1);
 	Candidate obj2 = admin.create_candidate("Max", 25,  "shoxR@gmail.com","+998445959053",  3, skills_emp2);
-	Candidate obj3 = admin.create_candidate("Ian", 30,  "KeyL@gmail.com", "+998995959043",  7, skills_emp3);
+	Candidate obj3 = admin.create_candidate("Ian", 30,  "IanL@gmail.com", "+998995959043",  7, skills_emp3);
 	Candidate obj4 = admin.create_candidate("Van", 34,  "Van@gmail.com",  "+998335959043",  8, skills_emp4);
 	Candidate obj5 = admin.create_candidate("Luv", 21,  "Luv@gmail.com",  "+998445959053",  2, skills_emp5);
 	Candidate obj6 = admin.create_candidate("Ann", 22,  "Ann@gmail.com",  "+998995959043",  4, skills_emp6);
@@ -264,11 +263,9 @@ void Prelimenary_data() {
 	
 	//Write accepted candidates to a file
 	admin.Write_canditate_to_file();
-	cout << "\n" << endl;
+	//cout << "\n" << endl;
 	//Take data about accepted candidates from a file
 	admin.Read_canditate_from_file();
-	cout << "\n" << endl;
-	
-	//admin.Clear_file();
+	admin.Clear_file();
 
 }	

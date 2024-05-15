@@ -94,12 +94,13 @@ void Candidate::set_skills(){
     cout<<"Enter your skills and if you want to stop enter 'stop' : "<<endl;
     do
     {
-        cout << "Enter your skill : "; cin >> skill;
+        cin.ignore(); 
+        cout << "Enter your skill : ";
+        getline(cin, skill);
+
         if (skill != "stop") {
             Skills.push_back(toLowerCase(skill));
     }
-        
-        
     } while (skill != "stop");
     Skills.shrink_to_fit();
 }
