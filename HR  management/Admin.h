@@ -295,7 +295,7 @@ void Admin::Sort_candidates_by_requirements(double experience_required, int mini
 void Admin::Write_canditate_to_file()
 {
 	Candidate candidate;
-	ofstream outfile("Candidates.dat", ios::app);
+	ofstream outfile("Candidates.txt", ios::app);
 	if (!outfile.is_open())
 	{
 		cout << "Error opening file for writing" << endl;
@@ -304,7 +304,11 @@ void Admin::Write_canditate_to_file()
 	{
 		for (auto& candidate: List_of_prommising_Candidates)
 		{
-			outfile<<candidate.get_name() << "-" << candidate.get_rating() << endl;
+			outfile << "ID: " << candidate.get_ID() << "\t";
+			outfile << "Name: " << candidate.get_name() << "\t";
+			outfile << "Email: " << candidate.get_email() << "\t";
+			outfile << "Phone number: " << candidate.get_phoneNumber() << "\t";
+			outfile << "Rating: " << candidate.get_rating() << endl;
 			cout << "Candidate " << candidate.get_name() << " added to the file" << endl;
 		}
 		
@@ -314,7 +318,7 @@ void Admin::Write_canditate_to_file()
 
 void Admin::Read_canditate_from_file()
 {
-	ifstream infile("Candidates.dat", ios::app);
+	ifstream infile("Candidates.txt", ios::app);
 	string name;
 	int rating;
 	if (!infile.is_open())
@@ -323,20 +327,48 @@ void Admin::Read_canditate_from_file()
 	}
 	else
 	{
-		while (getline(infile, name, '-'))
+		string line;
+		cout << "Reading from file:" << endl;
+		while (getline(infile, line))
 		{
+			string ID, name, email, phonenumber, rating;
+
+			infile >> ID;
+			infile.ignore();
+			getline(infile, ID, '\t');
+
+			infile >> name;
+			infile.ignore();
+			getline(infile, name, '\t');
+
+			infile >> email;
+			infile.ignore();
+			getline(infile, email, '\t');
+
+			infile >> phonenumber;
+			infile.ignore();
+			getline(infile, phonenumber, '\t');
+
 			infile >> rating;
 			infile.ignore();
+			getline(infile, rating);
+
+			cout << "ID: " << ID << "\t";
 			cout << "Name: " << name << "\t";
+			cout << "Email: " << email << "\t";
+			cout << "Phone Number: " << phonenumber << "\t";
 			cout << "Rating: " << rating << endl;
 		}
+		
+			
+		
 	}
 	infile.close();
 }
 
 void Admin::Clear_file()
 {
-	ofstream file("Candidates.dat");
+	ofstream file("Candidates.txt");
 	file.close();
 	cout << "File cleared" << endl;
 
