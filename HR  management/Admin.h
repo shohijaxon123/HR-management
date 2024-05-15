@@ -304,11 +304,12 @@ void Admin::Write_canditate_to_file()
 	{
 		for (auto& candidate: List_of_prommising_Candidates)
 		{
-			outfile << "ID: " << candidate.get_ID() << "\t";
-			outfile << "Name: " << candidate.get_name() << "\t";
-			outfile << "Email: " << candidate.get_email() << "\t";
-			outfile << "Phone number: " << candidate.get_phoneNumber() << "\t";
+			outfile << "ID: " << candidate.get_ID() << endl;
+			outfile << "Name: " << candidate.get_name() << endl;
+			outfile << "Email: " << candidate.get_email() << endl;
+			outfile << "Phone number: " << candidate.get_phoneNumber() << endl;
 			outfile << "Rating: " << candidate.get_rating() << endl;
+			outfile << "\n";
 			cout << "Candidate " << candidate.get_name() << " added to the file" << endl;
 		}
 		
@@ -351,7 +352,7 @@ void Admin::Read_canditate_from_file()
 
 			infile >> rating;
 			infile.ignore();
-			getline(infile, rating);
+			getline(infile, rating,'\n');
 
 			cout << "ID: " << ID << "\t";
 			cout << "Name: " << name << "\t";
@@ -359,9 +360,6 @@ void Admin::Read_canditate_from_file()
 			cout << "Phone Number: " << phonenumber << "\t";
 			cout << "Rating: " << rating << endl;
 		}
-		
-			
-		
 	}
 	infile.close();
 }

@@ -1,0 +1,36 @@
+ID: 4
+Name: Van
+Email: Van@gmail.com
+Phone number: +998335959043
+Rating: 10
+
+ID: 3
+Name: Ian
+Email: KeyL@gmail.com
+Phone number: +998995959043
+Rating: 5
+
+ID: 1
+Name: Key
+Email: danP@gmail.com
+Phone number: +998335959043
+Rating: 3
+
+ID: 2
+Name: Max
+Email: shoxR@gmail.com
+Phone number: +998445959053
+Rating: 3
+
+ID: 6
+Name: Ann
+Email: Ann@gmail.com
+Phone number: +998995959043
+Rating: 3
+
+ID: 5
+Name: Luv
+Email: Luv@gmail.com
+Phone number: +998445959053
+Rating: 1
+

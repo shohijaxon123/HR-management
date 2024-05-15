@@ -88,13 +88,6 @@ int main()
 		case 4:
 			cout << "\nInfo About Accepted Candidates:\n";
 			admin.Read_canditate_from_file();
-			//if (admin.get_List_of_prommising_Candidates().empty())
-			//{
-			//	cout << "No candidates accepted";
-			//}
-			//else {
-			//	admin.Read_canditate_from_file();
-			//}
 			break;
 		
 		case 5:
@@ -241,7 +234,7 @@ void Prelimenary_data() {
 
 	//Prepared skills for candidates
 	vector<string> skills_emp1 = { "CSS", "HTML" }; // 2 out of 6
-	vector<string> skills_emp2 = { "C++", "Java", "Git" };// 3 out of 6
+	vector<string> skills_emp2 = { "C++", "Java", "Git" };// 2 out of 6
 	vector<string> skills_emp3 = { "Java", "Python", "Git" }; // 3 out of 6
 	vector<string> skills_emp4 = { "rust", "HTML", "Python", "Java", "CSS", "Git" };//6 out of 6
 	vector<string> skills_emp5 = { "C++", "SQL","Git", "Docker" };// 2 out of 6
@@ -276,6 +269,6 @@ void Prelimenary_data() {
 	admin.Read_canditate_from_file();
 	cout << "\n" << endl;
 	
-	admin.Clear_file();
+	//admin.Clear_file();
 
 }	
