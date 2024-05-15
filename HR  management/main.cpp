@@ -181,7 +181,6 @@ int main()
 			break;
 		case 14:
 			admin.Clear_file();
-			cout << "File was cleared!" << endl;
 			break;
 		default:
 			cout << "Wrong comand!!!" << endl;

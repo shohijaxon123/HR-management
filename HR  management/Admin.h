@@ -370,7 +370,7 @@ void Admin::Clear_file()
 {
 	ofstream file("Candidates.txt");
 	file.close();
-	cout << "File cleared" << endl;
+	cout << "File was cleared!" << endl;
 
 }
 
