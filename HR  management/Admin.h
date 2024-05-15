@@ -297,7 +297,7 @@ void Admin::Sort_candidates_by_requirements(double experience_required, int mini
 void Admin::Write_canditate_to_file()
 {
 	Candidate candidate;
-	ofstream outfile("Candidates.txt", ios::app);
+	ofstream outfile("Candidates.dat", ios::app);
 	if (!outfile.is_open())
 	{
 		cout << "Error opening file for writing" << endl;
@@ -320,7 +320,7 @@ void Admin::Write_canditate_to_file()
 
 void Admin::Read_canditate_from_file()
 {
-	ifstream infile("Candidates.txt");
+	ifstream infile("Candidates.dat");
 	//string name;
 	//int rating;
 	if (!infile.is_open())
@@ -365,7 +365,7 @@ void Admin::Read_canditate_from_file()
 
 void Admin::Clear_file()
 {
-	ofstream file("Candidates.txt");
+	ofstream file("Candidates.dat");
 	file.close();
 	cout << "File cleared" << endl;
 
