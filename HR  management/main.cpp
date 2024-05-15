@@ -179,6 +179,10 @@ int main()
 		case 13:
 			Prelimenary_data();
 			break;
+		case 14:
+			admin.Clear_file();
+			cout << "File was cleared!" << endl;
+			break;
 		default:
 			cout << "Wrong comand!!!" << endl;
 			break;
@@ -255,15 +259,15 @@ void Prelimenary_data() {
 	
 	admin.display_candidates();
 	
-	cout << "\n" << endl;
-	
 	//Set rating to candidates
 	admin.recruitment(requirements3);
-	
+	cout << "Candidates were selected!\n" << endl;
+
 	//Sort candidates according to required experience and skills and accept candidates who satisfied requiremets
-	int rating;
+	int rating,exp;
+	cout << "Input Experience: "; cin >> exp;
 	cout << "Input Rating: "; cin >> rating;
-	admin.Sort_candidates_by_requirements(3, rating);
+	admin.Sort_candidates_by_requirements(exp, rating);
 	
 	//Write accepted candidates to a file
 	admin.Write_canditate_to_file();

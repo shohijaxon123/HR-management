@@ -231,7 +231,7 @@ void Admin::display_candidates() {
 		for (int i = 0; i < List_of_candidates.size(); i++) {
 			cout <<"ID: "<< List_of_candidates[i].get_ID() << " - " << List_of_candidates[i].get_name() << "; Age: " << List_of_candidates[i].get_age() << "; Experience: "<< List_of_candidates[i].get_experience()<< " years ";
 			if (List_of_candidates[i].get_rating() != 0) {
-				cout << List_of_candidates[i].get_rating() << endl;
+				cout <<"; Rating: "<< List_of_candidates[i].get_rating() << endl;
 			}
 			else {
 				cout << endl;
